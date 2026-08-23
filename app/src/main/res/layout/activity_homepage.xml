@@ -1,24 +1,416 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:scrollbars="none"
     tools:context=".homepage">
 
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to Home Page"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="10dp"
+    android:paddingTop="60dp"
+    android:paddingEnd="25dp"
+    android:paddingBottom="20dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/bg_profile"
+            android:clipToOutline="true"
+            android:contentDescription="Profile"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_profile"/>
+
+        <ImageButton
+            android:id="@+id/btnNotification"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_notification"
+            android:contentDescription="Notifications"
+            android:layout_marginHorizontal="275sp"
+            android:src="@drawable/ic_notification"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Events \nFor You.."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/filterAll"
+                android:layout_width="64dp"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_filter_selected"
+                android:gravity="center"
+                android:text="All"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/filterToday"
+                android:layout_width="82dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_filter_normal"
+                android:gravity="center"
+                android:text="Today"
+                android:textColor="#6D6D6D"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/filterTrending"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_filter_normal"
+                android:gravity="center"
+                android:text="Trending"
+                android:textColor="#6D6D6D"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/filterNearby"
+                android:layout_width="88dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_filter_normal"
+                android:gravity="center"
+                android:text="Nearby"
+                android:textColor="#6D6D6D"
+                android:textSize="14sp" />
+
+
+            <ImageButton
+                android:id="@+id/btnFilter"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_filter_button"
+                android:contentDescription="Filter"
+                android:padding="11dp"
+                android:src="@drawable/ic_filter" />
+
+
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Categories"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvSeeAllCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See All"
+            android:textColor="#777777"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/categoryAll"
+                android:layout_width="65dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_category_selected"
+                android:gravity="center"
+                android:text="All"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/categoryMusic"
+                android:layout_width="82dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="9dp"
+                android:background="@drawable/bg_category_normal"
+                android:gravity="center"
+                android:text="Music"
+                android:textColor="#555555"
+                android:textSize="13sp"/>
+
+            <TextView
+                android:id="@+id/categorySports"
+                android:layout_width="82dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_normal"
+                android:gravity="center"
+                android:text="Sports"
+                android:textColor="#555555"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/categoryFestival"
+                android:layout_width="92dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_normal"
+                android:gravity="center"
+                android:text="Festival"
+                android:textColor="#555555"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/categoryWorkshop"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_normal"
+                android:gravity="center"
+                android:text="Workshop"
+                android:textColor="#555555"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/categoryTechnology"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_normal"
+                android:gravity="center"
+                android:text="Technology"
+                android:textColor="#555555"
+                android:textSize="13sp" />
+
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/eventCard2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_event_card"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="245dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Technological summit"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/musicevent"/>
+<!--                    android:src="@drawable/ai tech summit.jpg"/>-->
+
+                <ImageButton
+                    android:id="@+id/btnFavorite1"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="14dp"
+                    android:background="@drawable/bg_white_circle"
+                    android:contentDescription="Favorite"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_favorite_border" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="1dp"
+                    android:text="Music Event "
+                    android:textColor="#222222"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvEventLocation2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Gandhinager, Gujarat"
+                    android:textColor="#777777"
+                    android:textSize="17sp" />
+
+
+                <ImageButton
+                    android:id="@+id/btnEventArrow2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_white_circle"
+                    android:contentDescription="Open event"
+                    android:padding="14dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="9dp"
+                    android:src="@drawable/ic_arrow" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/eventCard1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_event_card"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="245dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Technological summit"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/aisummit"
+                    />
+<!--                    android:src=""/>-->
+
+                <ImageButton
+                    android:id="@+id/btnFavorite2"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="14dp"
+                    android:background="@drawable/bg_white_circle"
+                    android:contentDescription="Favorite"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_favorite_border" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="1dp"
+                    android:text="AI Technological \nsummit"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#222222"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvEventLocation1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Ahmedabad, Gujarat"
+                    android:textColor="#777777"
+                    android:textSize="17sp" />
+
+
+                <ImageButton
+                    android:id="@+id/btnEventArrow1"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_white_circle"
+                    android:contentDescription="Open event"
+                    android:padding="14dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="9dp"
+                    android:src="@drawable/ic_arrow" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>
+
+
+
+</ScrollView>
