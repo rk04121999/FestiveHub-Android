@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "172814558519",
+    "project_id": "festive-hub-9a777",
+    "storage_bucket": "festive-hub-9a777.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172814558519:android:117eacec2473d2114a66b2",
+        "android_client_info": {
+          "package_name": "com.example.javapractice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs5NaoL57ewQJXolwAbsjNI052nzr2P3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
