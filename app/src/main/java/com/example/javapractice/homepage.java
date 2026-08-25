@@ -32,6 +32,7 @@ public class homepage extends AppCompatActivity {
     private LinearLayout navProfile;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -224,7 +225,6 @@ public class homepage extends AppCompatActivity {
             );
         }
 
-
         btnEventArrow.setOnClickListener(v -> {
 
             Intent intent = new Intent(
@@ -233,49 +233,84 @@ public class homepage extends AppCompatActivity {
             );
 
 
-            intent.putExtra(
-                    "eventName",
-                    event.getEventName()
-            );
+            intent.putExtra("eventName", event.getEventName());
+            intent.putExtra("eventDate", event.getEventDate());
+            intent.putExtra("eventTime", event.getEventTime());
+            intent.putExtra("eventPlace", event.getEventPlace());
+            intent.putExtra("eventAddress", event.getEventAddress());
+            intent.putExtra("ticketPrice", event.getTicketPrice());
+            intent.putExtra("eventDescription", event.getEventDescription());
 
-            intent.putExtra(
-                    "eventDate",
-                    event.getEventDate()
-            );
+//            int imageResource = getResources().getIdentifier(
+//                    event.getEventImage(),
+//                    "drawable",
+//                    getPackageName()
+//            );
 
-            intent.putExtra(
-                    "eventTime",
-                    event.getEventTime()
-            );
-
-            intent.putExtra(
-                    "eventPlace",
-                    event.getEventPlace()
-            );
-
-            intent.putExtra(
-                    "eventAddress",
-                    event.getEventAddress()
-            );
-
-            intent.putExtra(
-                    "ticketPrice",
-                    event.getTicketPrice()
-            );
-
-            intent.putExtra(
-                    "eventDescription",
-                    event.getEventDescription()
-            );
-
-            intent.putExtra(
-                    "eventImage",
-                    imageResource
-            );
-
+//            intent.putExtra("eventImage", imageResource);
 
             startActivity(intent);
         });
+
+
+//        btnEventArrow.setOnClickListener(v -> {
+//
+//            Intent intent = new Intent(
+//                    homepage.this,
+//                    eventdetailactivity.class
+//            );
+//
+//
+//            intent.putExtra(
+//                    "eventName",
+//                    event.getEventName()
+//            );
+//
+//            intent.putExtra(
+//                    "eventDate",
+//                    event.getEventDate()
+//            );
+//
+//            intent.putExtra(
+//                    "eventTime",
+//                    event.getEventTime()
+//            );
+//
+//            intent.putExtra(
+//                    "eventPlace",
+//                    event.getEventPlace()
+//            );
+//
+//            intent.putExtra(
+//                    "eventAddress",
+//                    event.getEventAddress()
+//            );
+//
+//            intent.putExtra(
+//                    "ticketPrice",
+//                    event.getTicketPrice()
+//            );
+//
+//            intent.putExtra(
+//                    "eventDescription",
+//                    event.getEventDescription()
+//
+//            );
+//
+//            int imageResource = getResources().getIdentifier(
+//                    event.getEventImage(),
+//                    "drawable",
+//                    getPackageName()
+//            );
+//
+//            intent.putExtra(
+//                    "eventImage",
+//                    imageResource
+//            );
+//
+//
+//            startActivity(intent);
+//        });
 
 
         eventContainer.addView(eventView);

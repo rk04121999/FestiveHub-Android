@@ -145,7 +145,7 @@
             <Button
                 android:id="@+id/btnBookEvent"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="55dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="20dp"
                 android:backgroundTint="#087F5F"

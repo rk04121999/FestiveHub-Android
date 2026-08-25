@@ -35,14 +35,14 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="95dp"
+                android:layout_height="95dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="25dp"
-                android:background="@drawable/ic_profile"
+                android:background="@drawable/bg_profile"
                 android:contentDescription="Profile"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_profile" />
+                android:src="@drawable/bg_profile" />
 
             <TextView
                 android:layout_width="match_parent"

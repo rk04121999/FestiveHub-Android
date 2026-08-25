@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class EventAdapter
-        extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private final Context context;
     private final List<Event> eventList;
@@ -48,21 +47,18 @@ public class EventAdapter
         holder.tvEventName.setText(event.getEventName());
         holder.tvEventLocation.setText(event.getEventPlace());
 
-
-        @SuppressLint("DiscouragedApi") int imageResource = context.getResources()
-                .getIdentifier(
-                        event.getEventImage(),
-                        "drawable",
-                        context.getPackageName()
-                );
+        @SuppressLint("DiscouragedApi")
+        int imageResource = context.getResources().getIdentifier(
+                event.getEventImage(),
+                "drawable",
+                context.getPackageName()
+        );
 
         if (imageResource != 0) {
             holder.ivEventImage.setImageResource(imageResource);
-        }else {
+        } else {
             holder.ivEventImage.setImageResource(R.drawable.aisummit);
-
         }
-
 
         holder.btnEventArrow.setOnClickListener(v -> {
 
@@ -71,45 +67,14 @@ public class EventAdapter
                     eventdetailactivity.class
             );
 
-            intent.putExtra(
-                    "eventName",
-                    event.getEventName()
-            );
-
-            intent.putExtra(
-                    "eventDate",
-                    event.getEventDate()
-            );
-
-            intent.putExtra(
-                    "eventTime",
-                    event.getEventTime()
-            );
-
-            intent.putExtra(
-                    "eventPlace",
-                    event.getEventPlace()
-            );
-
-            intent.putExtra(
-                    "eventAddress",
-                    event.getEventAddress()
-            );
-
-            intent.putExtra(
-                    "ticketPrice",
-                    event.getTicketPrice()
-            );
-
-            intent.putExtra(
-                    "eventDescription",
-                    event.getEventDescription()
-            );
-
-            intent.putExtra(
-                    "eventImage",
-                    imageResource
-            );
+            intent.putExtra("eventName", event.getEventName());
+            intent.putExtra("eventDate", event.getEventDate());
+            intent.putExtra("eventTime", event.getEventTime());
+            intent.putExtra("eventPlace", event.getEventPlace());
+            intent.putExtra("eventAddress", event.getEventAddress());
+            intent.putExtra("ticketPrice", event.getTicketPrice());
+            intent.putExtra("eventDescription", event.getEventDescription());
+            intent.putExtra("eventImage", imageResource);
 
             context.startActivity(intent);
         });
@@ -120,8 +85,7 @@ public class EventAdapter
         return eventList.size();
     }
 
-    public static class EventViewHolder
-            extends RecyclerView.ViewHolder {
+    public static class EventViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivEventImage;
         TextView tvEventName;
@@ -131,17 +95,10 @@ public class EventAdapter
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            ivEventImage =
-                    itemView.findViewById(R.id.ivEventImage);
-
-            tvEventName =
-                    itemView.findViewById(R.id.tvEventName);
-
-            tvEventLocation =
-                    itemView.findViewById(R.id.tvEventLocation);
-
-            btnEventArrow =
-                    itemView.findViewById(R.id.btnEventArrow);
+            ivEventImage = itemView.findViewById(R.id.ivEventImage);
+            tvEventName = itemView.findViewById(R.id.tvEventName);
+            tvEventLocation = itemView.findViewById(R.id.tvEventLocation);
+            btnEventArrow = itemView.findViewById(R.id.btnEventArrow);
         }
     }
 }

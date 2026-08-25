@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class EditEventActivity extends AppCompatActivity {
     private Button btnUpdateEvent;
 
     private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     private String eventId;
 
@@ -35,11 +37,9 @@ public class EditEventActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_edit_event);
 
-
         eventId = getIntent().getStringExtra("eventId");
 
         if (eventId == null || eventId.isEmpty()) {
-
             Toast.makeText(
                     this,
                     "Event ID not found",
@@ -50,43 +50,23 @@ public class EditEventActivity extends AppCompatActivity {
             return;
         }
 
-        // Find views
-        etEventName =
-                findViewById(R.id.etEditEventName);
+        etEventName = findViewById(R.id.etEditEventName);
+        etEventDate = findViewById(R.id.etEditEventDate);
+        etEventTime = findViewById(R.id.etEditEventTime);
+        etEventPlace = findViewById(R.id.etEditEventPlace);
+        etEventAddress = findViewById(R.id.etEditEventAddress);
+        etTicketPrice = findViewById(R.id.etEditTicketPrice);
+        etEventImage = findViewById(R.id.etEditEventImage);
+        etEventDescription = findViewById(R.id.etEditEventDescription);
 
-        etEventDate =
-                findViewById(R.id.etEditEventDate);
-
-        etEventTime =
-                findViewById(R.id.etEditEventTime);
-
-        etEventPlace =
-                findViewById(R.id.etEditEventPlace);
-
-        etEventAddress =
-                findViewById(R.id.etEditEventAddress);
-
-        etTicketPrice =
-                findViewById(R.id.etEditTicketPrice);
-
-        etEventImage =
-                findViewById(R.id.etEditEventImage);
-
-        etEventDescription =
-                findViewById(R.id.etEditEventDescription);
-
-        btnUpdateEvent =
-                findViewById(R.id.btnUpdateEvent);
+        btnUpdateEvent = findViewById(R.id.btnUpdateEvent);
 
         db = FirebaseFirestore.getInstance();
-
+        mAuth = FirebaseAuth.getInstance();
 
         loadEvent();
 
-        // Update button
-        btnUpdateEvent.setOnClickListener(
-                v -> updateEvent()
-        );
+        btnUpdateEvent.setOnClickListener(v -> updateEvent());
     }
 
     private void loadEvent() {
@@ -96,49 +76,7 @@ public class EditEventActivity extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
 
-                    if (documentSnapshot.exists()) {
-
-                        Event event =
-                                documentSnapshot.toObject(
-                                        Event.class
-                                );
-
-                        if (event != null) {
-
-                            etEventName.setText(
-                                    event.getEventName()
-                            );
-
-                            etEventDate.setText(
-                                    event.getEventDate()
-                            );
-
-                            etEventTime.setText(
-                                    event.getEventTime()
-                            );
-
-                            etEventPlace.setText(
-                                    event.getEventPlace()
-                            );
-
-                            etEventAddress.setText(
-                                    event.getEventAddress()
-                            );
-
-                            etTicketPrice.setText(
-                                    event.getTicketPrice()
-                            );
-
-                            etEventImage.setText(
-                                    event.getEventImage()
-                            );
-
-                            etEventDescription.setText(
-                                    event.getEventDescription()
-                            );
-                        }
-
-                    } else {
+                    if (!documentSnapshot.exists()) {
 
                         Toast.makeText(
                                 EditEventActivity.this,
@@ -147,14 +85,31 @@ public class EditEventActivity extends AppCompatActivity {
                         ).show();
 
                         finish();
+                        return;
+                    }
+
+                    Event event =
+                            documentSnapshot.toObject(Event.class);
+
+                    if (event != null) {
+
+                        etEventName.setText(event.getEventName());
+                        etEventDate.setText(event.getEventDate());
+                        etEventTime.setText(event.getEventTime());
+                        etEventPlace.setText(event.getEventPlace());
+                        etEventAddress.setText(event.getEventAddress());
+                        etTicketPrice.setText(event.getTicketPrice());
+                        etEventImage.setText(event.getEventImage());
+                        etEventDescription.setText(
+                                event.getEventDescription()
+                        );
                     }
                 })
                 .addOnFailureListener(e -> {
 
                     Toast.makeText(
                             EditEventActivity.this,
-                            "Error loading event: "
-                                    + e.getMessage(),
+                            "Error loading event: " + e.getMessage(),
                             Toast.LENGTH_LONG
                     ).show();
                 });
@@ -162,46 +117,40 @@ public class EditEventActivity extends AppCompatActivity {
 
     private void updateEvent() {
 
+        if (mAuth.getCurrentUser() == null) {
+
+            Toast.makeText(
+                    this,
+                    "Please login first",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            return;
+        }
+
         String eventName =
-                etEventName.getText()
-                        .toString()
-                        .trim();
+                etEventName.getText().toString().trim();
 
         String eventDate =
-                etEventDate.getText()
-                        .toString()
-                        .trim();
+                etEventDate.getText().toString().trim();
 
         String eventTime =
-                etEventTime.getText()
-                        .toString()
-                        .trim();
+                etEventTime.getText().toString().trim();
 
         String eventPlace =
-                etEventPlace.getText()
-                        .toString()
-                        .trim();
+                etEventPlace.getText().toString().trim();
 
         String eventAddress =
-                etEventAddress.getText()
-                        .toString()
-                        .trim();
+                etEventAddress.getText().toString().trim();
 
         String ticketPrice =
-                etTicketPrice.getText()
-                        .toString()
-                        .trim();
+                etTicketPrice.getText().toString().trim();
 
         String eventImage =
-                etEventImage.getText()
-                        .toString()
-                        .trim();
+                etEventImage.getText().toString().trim();
 
         String eventDescription =
-                etEventDescription.getText()
-                        .toString()
-                        .trim();
-
+                etEventDescription.getText().toString().trim();
 
         if (eventName.isEmpty() ||
                 eventDate.isEmpty() ||
@@ -221,7 +170,6 @@ public class EditEventActivity extends AppCompatActivity {
             return;
         }
 
-        // Create updated data
         Map<String, Object> event =
                 new HashMap<>();
 
@@ -234,7 +182,8 @@ public class EditEventActivity extends AppCompatActivity {
         event.put("eventImage", eventImage);
         event.put("eventDescription", eventDescription);
 
-        // Update existing Firestore document
+        btnUpdateEvent.setEnabled(false);
+
         db.collection("events")
                 .document(eventId)
                 .update(event)
@@ -250,10 +199,11 @@ public class EditEventActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> {
 
+                    btnUpdateEvent.setEnabled(true);
+
                     Toast.makeText(
                             EditEventActivity.this,
-                            "Update failed: "
-                                    + e.getMessage(),
+                            "Update failed: " + e.getMessage(),
                             Toast.LENGTH_LONG
                     ).show();
                 });

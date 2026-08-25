@@ -59,7 +59,7 @@ public class eventdetailactivity extends AppCompatActivity {
         eventDescription =
                 findViewById(R.id.eventDescription);
 
-        btnBack = findViewById(R.id.btnBack);
+       btnBack = findViewById(R.id.btnBack);
         btnBookEvent = findViewById(R.id.btnBookEvent);
 
 
@@ -239,6 +239,9 @@ public class eventdetailactivity extends AppCompatActivity {
             return;
         }
 
+//        String userId = currentUser.getUid();
+//        String userEmail = currentUser.getEmail();
+
 
 
         btnBookEvent.setEnabled(false);
@@ -316,7 +319,7 @@ public class eventdetailactivity extends AppCompatActivity {
                             ).show();
 
 
-                            // Change button text
+
 
                             btnBookEvent.setText(
                                     "Registered"
