@@ -58,6 +58,30 @@
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AdminEventsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminDeleteEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminVolunteersActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AdminCollegeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AdminNotificationsActivity"
+            android:exported="false" />
+
+
     </application>
 
 </manifest>

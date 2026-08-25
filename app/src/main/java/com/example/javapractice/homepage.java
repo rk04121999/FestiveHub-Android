@@ -69,11 +69,21 @@ public class homepage extends AppCompatActivity {
 
             Intent intent = new Intent(
                     homepage.this,
-                    EventManagementActivity.class
+                    EventsActivity.class
             );
 
             startActivity(intent);
         });
+
+//        navEvents.setOnClickListener(v -> {
+//
+//            Intent intent = new Intent(
+//                    homepage.this,
+//                    EventManagementActivity.class
+//            );
+//
+//            startActivity(intent);
+//        });
 
         navProfile.setOnClickListener(v -> {
 

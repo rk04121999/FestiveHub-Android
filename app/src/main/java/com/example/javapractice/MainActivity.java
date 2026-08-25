@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private static final String ADMIN_EMAIL = "admin@festivehub.com";
+    private static final String ADMIN_PASSWORD = "Admin@123";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +31,12 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        // Firebase
         mAuth = FirebaseAuth.getInstance();
 
-        // Login fields
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
         loginButton = findViewById(R.id.main_login);
 
-        // Sign Up
         TextView signupText = findViewById(R.id.signupText);
 
         signupText.setOnClickListener(v -> {
@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Forgot Password
         TextView forgotPasswordText =
                 findViewById(R.id.forgotPasswordText);
 
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Login button
         loginButton.setOnClickListener(v -> loginUser());
     }
 
@@ -76,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
         String password = loginPassword.getText()
                 .toString();
 
-        // Check email
         if (TextUtils.isEmpty(email)) {
+
             loginEmail.setError("Enter your email");
             loginEmail.requestFocus();
             return;
         }
 
-        // Check password
         if (TextUtils.isEmpty(password)) {
+
             loginPassword.setError("Enter your password");
             loginPassword.requestFocus();
             return;
@@ -92,41 +90,84 @@ public class MainActivity extends AppCompatActivity {
 
         loginButton.setEnabled(false);
 
-        // Firebase Login
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
+        if (email.equals(ADMIN_EMAIL)
+                && password.equals(ADMIN_PASSWORD)) {
 
-                    if (task.isSuccessful()) {
+            mAuth.signInWithEmailAndPassword(
+                    ADMIN_EMAIL,
+                    ADMIN_PASSWORD
+            ).addOnCompleteListener(this, task -> {
 
-                        Toast.makeText(
-                                MainActivity.this,
-                                "Login successful",
-                                Toast.LENGTH_SHORT
-                        ).show();
+                if (task.isSuccessful()) {
 
-                        // Open Home
-                        Intent intent = new Intent(
-                                MainActivity.this,
-                                homepage.class
-                        );
+                    Toast.makeText(
+                            MainActivity.this,
+                            "Admin Login Successful",
+                            Toast.LENGTH_SHORT
+                    ).show();
 
-                        startActivity(intent);
-                        finish();
+                    Intent intent = new Intent(
+                            MainActivity.this,
+                            AdminDashboardActivity.class
+                    );
 
-                    } else {
+                    startActivity(intent);
+                    finish();
 
-                        loginButton.setEnabled(true);
+                } else {
 
-                        String error = task.getException() != null
-                                ? task.getException().getMessage()
-                                : "Login failed";
+                    loginButton.setEnabled(true);
 
-                        Toast.makeText(
-                                MainActivity.this,
-                                error,
-                                Toast.LENGTH_LONG
-                        ).show();
-                    }
-                });
+                    Toast.makeText(
+                            MainActivity.this,
+                            "Admin Firebase login failed",
+                            Toast.LENGTH_LONG
+                    ).show();
+                }
+            });
+
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(
+                email,
+                password
+        ).addOnCompleteListener(this, task -> {
+
+            if (task.isSuccessful()) {
+
+                Toast.makeText(
+                        MainActivity.this,
+                        "Login successful",
+                        Toast.LENGTH_SHORT
+                ).show();
+
+                Intent intent = new Intent(
+                        MainActivity.this,
+                        homepage.class
+                );
+
+                startActivity(intent);
+                finish();
+
+            } else {
+
+                loginButton.setEnabled(true);
+
+                String error;
+
+                if (task.getException() != null) {
+                    error = task.getException().getMessage();
+                } else {
+                    error = "Login failed";
+                }
+
+                Toast.makeText(
+                        MainActivity.this,
+                        error,
+                        Toast.LENGTH_LONG
+                ).show();
+            }
+        });
     }
 }

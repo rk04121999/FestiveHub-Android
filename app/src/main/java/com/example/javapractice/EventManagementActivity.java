@@ -24,11 +24,15 @@ public class EventManagementActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
 
+    private boolean isAdmin = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_event_management);
+
+        isAdmin = getIntent().getBooleanExtra("isAdmin", false);
 
         btnOpenAddEvent =
                 findViewById(R.id.btnOpenAddEvent);
@@ -49,10 +53,10 @@ public class EventManagementActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        loadMyEvents();
+        loadEvents();
     }
 
-    private void loadMyEvents() {
+    private void loadEvents() {
 
         if (mAuth.getCurrentUser() == null) {
 
@@ -68,48 +72,95 @@ public class EventManagementActivity extends AppCompatActivity {
         String currentUserId =
                 mAuth.getCurrentUser().getUid();
 
-        db.collection("events")
-                .whereEqualTo("createdBy", currentUserId)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        if (isAdmin) {
 
-                    managementEventContainer.removeAllViews();
+            db.collection("events")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
 
-                    if (queryDocumentSnapshots.isEmpty()) {
+                        managementEventContainer.removeAllViews();
+
+                        if (queryDocumentSnapshots.isEmpty()) {
+
+                            Toast.makeText(
+                                    EventManagementActivity.this,
+                                    "No events found",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                            return;
+                        }
+
+                        for (DocumentSnapshot document :
+                                queryDocumentSnapshots.getDocuments()) {
+
+                            Event event =
+                                    document.toObject(Event.class);
+
+                            if (event != null) {
+
+                                addManagementEvent(
+                                        document.getId(),
+                                        event
+                                );
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
 
                         Toast.makeText(
                                 EventManagementActivity.this,
-                                "You have not added any events",
-                                Toast.LENGTH_SHORT
+                                "Error loading events: "
+                                        + e.getMessage(),
+                                Toast.LENGTH_LONG
                         ).show();
+                    });
 
-                        return;
-                    }
+        } else {
 
-                    for (DocumentSnapshot document :
-                            queryDocumentSnapshots.getDocuments()) {
+            db.collection("events")
+                    .whereEqualTo("createdBy", currentUserId)
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
 
-                        Event event =
-                                document.toObject(Event.class);
+                        managementEventContainer.removeAllViews();
 
-                        if (event != null) {
+                        if (queryDocumentSnapshots.isEmpty()) {
 
-                            addManagementEvent(
-                                    document.getId(),
-                                    event
-                            );
+                            Toast.makeText(
+                                    EventManagementActivity.this,
+                                    "You have not added any events",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                            return;
                         }
-                    }
-                })
-                .addOnFailureListener(e -> {
 
-                    Toast.makeText(
-                            EventManagementActivity.this,
-                            "Error loading your events: "
-                                    + e.getMessage(),
-                            Toast.LENGTH_LONG
-                    ).show();
-                });
+                        for (DocumentSnapshot document :
+                                queryDocumentSnapshots.getDocuments()) {
+
+                            Event event =
+                                    document.toObject(Event.class);
+
+                            if (event != null) {
+
+                                addManagementEvent(
+                                        document.getId(),
+                                        event
+                                );
+                            }
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+
+                        Toast.makeText(
+                                EventManagementActivity.this,
+                                "Error loading your events: "
+                                        + e.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    });
+        }
     }
 
     private void addManagementEvent(
@@ -161,7 +212,6 @@ public class EventManagementActivity extends AppCompatActivity {
                 event.getEventDate()
         );
 
-        // EDIT
         btnEdit.setOnClickListener(v -> {
 
             Intent intent = new Intent(
@@ -226,9 +276,36 @@ public class EventManagementActivity extends AppCompatActivity {
             return;
         }
 
+        if (isAdmin) {
+
+            db.collection("events")
+                    .document(documentId)
+                    .delete()
+                    .addOnSuccessListener(unused -> {
+
+                        Toast.makeText(
+                                EventManagementActivity.this,
+                                "Event deleted successfully",
+                                Toast.LENGTH_SHORT
+                        ).show();
+
+                        loadEvents();
+                    })
+                    .addOnFailureListener(e -> {
+
+                        Toast.makeText(
+                                EventManagementActivity.this,
+                                "Delete failed: "
+                                        + e.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    });
+
+            return;
+        }
+
         String currentUserId =
                 mAuth.getCurrentUser().getUid();
-
 
         db.collection("events")
                 .document(documentId)
@@ -251,7 +328,6 @@ public class EventManagementActivity extends AppCompatActivity {
                                     "createdBy"
                             );
 
-
                     if (eventOwner == null ||
                             !eventOwner.equals(currentUserId)) {
 
@@ -264,7 +340,6 @@ public class EventManagementActivity extends AppCompatActivity {
                         return;
                     }
 
-
                     db.collection("events")
                             .document(documentId)
                             .delete()
@@ -276,7 +351,7 @@ public class EventManagementActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT
                                 ).show();
 
-                                loadMyEvents();
+                                loadEvents();
                             })
                             .addOnFailureListener(e -> {
 
@@ -306,7 +381,7 @@ public class EventManagementActivity extends AppCompatActivity {
         if (db != null &&
                 managementEventContainer != null) {
 
-            loadMyEvents();
+            loadEvents();
         }
     }
 }
