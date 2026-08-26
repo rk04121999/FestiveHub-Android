@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.SharedPreferences;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -102,6 +104,24 @@ public class ProfileActivity extends AppCompatActivity {
 
             // Already on Profile
 
+        });
+
+
+        Button btnLogout = findViewById(R.id.btnLogout);
+
+        btnLogout.setOnClickListener(v -> {
+
+            FirebaseAuth.getInstance().signOut();
+
+            SharedPreferences preferences =
+                    getSharedPreferences("UserPrefs", MODE_PRIVATE);
+
+            preferences.edit().clear().apply();
+
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
     }
 
