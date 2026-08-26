@@ -39,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_profile);
-        
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -85,7 +85,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-
         navEvents.setOnClickListener(v -> {
 
             Intent intent = new Intent(
@@ -97,7 +96,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             finish();
         });
-
 
 
         navProfile.setOnClickListener(v -> {
