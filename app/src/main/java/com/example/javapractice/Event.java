@@ -1,1 +1,118 @@
-package com.example.javapractice; public class Event { private String eventName; private String eventDate; private String eventTime; private String eventPlace; private String eventAddress; private String ticketPrice; private String eventDescription; private String eventImage; private String createdBy; public Event() { } public Event( String eventName, String eventDate, String eventTime, String eventPlace, String eventAddress, String ticketPrice, String eventDescription, String eventImage) { this.eventName = eventName; this.eventDate = eventDate; this.eventTime = eventTime; this.eventPlace = eventPlace; this.eventAddress = eventAddress; this.ticketPrice = ticketPrice; this.eventDescription = eventDescription; this.eventImage = eventImage; } public String getEventName() { return eventName; } public void setEventName(String eventName) { this.eventName = eventName; } public String getEventDate() { return eventDate; } public void setEventDate(String eventDate) { this.eventDate = eventDate; } public String getEventTime() { return eventTime; } public void setEventTime(String eventTime) { this.eventTime = eventTime; } public String getEventPlace() { return eventPlace; } public void setEventPlace(String eventPlace) { this.eventPlace = eventPlace; } public String getEventAddress() { return eventAddress; } public void setEventAddress(String eventAddress) { this.eventAddress = eventAddress; } public String getTicketPrice() { return ticketPrice; } public void setTicketPrice(String ticketPrice) { this.ticketPrice = ticketPrice; } public String getEventDescription() { return eventDescription; } public void setEventDescription(String eventDescription) { this.eventDescription = eventDescription; } public String getEventImage() { return eventImage; } public void setEventImage(String eventImage) { this.eventImage = eventImage; } public String getCreatedBy() { return createdBy; } public void setCreatedBy(String createdBy) { this.createdBy = createdBy; } }
+package com.example.javapractice;
+
+public class Event {
+
+    private String eventId;
+    private String eventName;
+    private String eventDate;
+    private String eventTime;
+    private String eventPlace;
+    private String eventAddress;
+    private String ticketPrice;
+    private String eventDescription;
+    private String eventImage;
+    private String createdBy;
+
+    public Event() {
+    }
+
+    public Event(
+            String eventName,
+            String eventDate,
+            String eventTime,
+            String eventPlace,
+            String eventAddress,
+            String ticketPrice,
+            String eventDescription,
+            String eventImage
+    ) {
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
+        this.eventPlace = eventPlace;
+        this.eventAddress = eventAddress;
+        this.ticketPrice = ticketPrice;
+        this.eventDescription = eventDescription;
+        this.eventImage = eventImage;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public String getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.eventTime = eventTime;
+    }
+
+    public String getEventPlace() {
+        return eventPlace;
+    }
+
+    public void setEventPlace(String eventPlace) {
+        this.eventPlace = eventPlace;
+    }
+
+    public String getEventAddress() {
+        return eventAddress;
+    }
+
+    public void setEventAddress(String eventAddress) {
+        this.eventAddress = eventAddress;
+    }
+
+    public String getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(String ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
+    }
+
+    public String getEventImage() {
+        return eventImage;
+    }
+
+    public void setEventImage(String eventImage) {
+        this.eventImage = eventImage;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+}

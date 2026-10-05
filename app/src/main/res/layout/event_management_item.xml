@@ -62,6 +62,15 @@
             android:text="Delete Event"
             android:textAllCaps="false" />
 
+        <Button
+            android:id="@+id/btnRegisteredUsers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registered Users"
+            android:layout_marginTop="12dp"/>
+
+
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

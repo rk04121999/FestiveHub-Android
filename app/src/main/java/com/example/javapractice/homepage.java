@@ -31,8 +31,6 @@ public class homepage extends AppCompatActivity {
     private LinearLayout navEvents;
     private LinearLayout navProfile;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,19 +38,6 @@ public class homepage extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         setContentView(R.layout.activity_homepage);
-
-
-//        btnProfile = findViewById(R.id.btnProfile);
-//
-//        btnProfile.setOnClickListener(v -> {
-//
-//            Intent intent = new Intent(
-//                    homepage.this,
-//                    ProfileActivity.class
-//            );
-//
-//            startActivity(intent);
-//        });
 
         eventContainer =
                 findViewById(R.id.eventContainer);
@@ -62,7 +47,6 @@ public class homepage extends AppCompatActivity {
         navProfile = findViewById(R.id.navProfile);
 
         navHome.setOnClickListener(v -> {
-
         });
 
         navEvents.setOnClickListener(v -> {
@@ -75,16 +59,6 @@ public class homepage extends AppCompatActivity {
             startActivity(intent);
         });
 
-//        navEvents.setOnClickListener(v -> {
-//
-//            Intent intent = new Intent(
-//                    homepage.this,
-//                    EventManagementActivity.class
-//            );
-//
-//            startActivity(intent);
-//        });
-
         navProfile.setOnClickListener(v -> {
 
             Intent intent = new Intent(
@@ -95,12 +69,9 @@ public class homepage extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         db = FirebaseFirestore.getInstance();
 
-
         loadEvents();
-
 
         ViewCompat.setOnApplyWindowInsetsListener(
                 findViewById(R.id.main),
@@ -123,17 +94,13 @@ public class homepage extends AppCompatActivity {
         );
     }
 
-
     private void loadEvents() {
 
         db.collection("events")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
 
-
                     eventContainer.removeAllViews();
-
-
 
                     for (DocumentSnapshot document :
                             queryDocumentSnapshots.getDocuments()) {
@@ -143,10 +110,11 @@ public class homepage extends AppCompatActivity {
 
                         if (event != null) {
 
+                            event.setEventId(document.getId());
+
                             addEventCard(event);
                         }
                     }
-
 
                     if (queryDocumentSnapshots.isEmpty()) {
 
@@ -170,7 +138,6 @@ public class homepage extends AppCompatActivity {
                 });
     }
 
-
     private void addEventCard(Event event) {
 
         View eventView =
@@ -180,7 +147,6 @@ public class homepage extends AppCompatActivity {
                                 eventContainer,
                                 false
                         );
-
 
         ImageView ivEventImage =
                 eventView.findViewById(
@@ -202,17 +168,13 @@ public class homepage extends AppCompatActivity {
                         R.id.btnEventArrow
                 );
 
-
-
         tvEventName.setText(
                 event.getEventName()
         );
 
-
         tvEventLocation.setText(
                 event.getEventPlace()
         );
-
 
         int imageResource =
                 getResources().getIdentifier(
@@ -220,7 +182,6 @@ public class homepage extends AppCompatActivity {
                         "drawable",
                         getPackageName()
                 );
-
 
         if (imageResource != 0) {
 
@@ -242,90 +203,56 @@ public class homepage extends AppCompatActivity {
                     eventdetailactivity.class
             );
 
+            intent.putExtra(
+                    "eventId",
+                    event.getEventId()
+            );
 
-            intent.putExtra("eventName", event.getEventName());
-            intent.putExtra("eventDate", event.getEventDate());
-            intent.putExtra("eventTime", event.getEventTime());
-            intent.putExtra("eventPlace", event.getEventPlace());
-            intent.putExtra("eventAddress", event.getEventAddress());
-            intent.putExtra("ticketPrice", event.getTicketPrice());
-            intent.putExtra("eventDescription", event.getEventDescription());
+            intent.putExtra(
+                    "eventName",
+                    event.getEventName()
+            );
 
-//            int imageResource = getResources().getIdentifier(
-//                    event.getEventImage(),
-//                    "drawable",
-//                    getPackageName()
-//            );
+            intent.putExtra(
+                    "eventDate",
+                    event.getEventDate()
+            );
 
-//            intent.putExtra("eventImage", imageResource);
+            intent.putExtra(
+                    "eventTime",
+                    event.getEventTime()
+            );
+
+            intent.putExtra(
+                    "eventPlace",
+                    event.getEventPlace()
+            );
+
+            intent.putExtra(
+                    "eventAddress",
+                    event.getEventAddress()
+            );
+
+            intent.putExtra(
+                    "ticketPrice",
+                    event.getTicketPrice()
+            );
+
+            intent.putExtra(
+                    "eventDescription",
+                    event.getEventDescription()
+            );
+
+            intent.putExtra(
+                    "eventImage",
+                    imageResource
+            );
 
             startActivity(intent);
         });
 
-
-//        btnEventArrow.setOnClickListener(v -> {
-//
-//            Intent intent = new Intent(
-//                    homepage.this,
-//                    eventdetailactivity.class
-//            );
-//
-//
-//            intent.putExtra(
-//                    "eventName",
-//                    event.getEventName()
-//            );
-//
-//            intent.putExtra(
-//                    "eventDate",
-//                    event.getEventDate()
-//            );
-//
-//            intent.putExtra(
-//                    "eventTime",
-//                    event.getEventTime()
-//            );
-//
-//            intent.putExtra(
-//                    "eventPlace",
-//                    event.getEventPlace()
-//            );
-//
-//            intent.putExtra(
-//                    "eventAddress",
-//                    event.getEventAddress()
-//            );
-//
-//            intent.putExtra(
-//                    "ticketPrice",
-//                    event.getTicketPrice()
-//            );
-//
-//            intent.putExtra(
-//                    "eventDescription",
-//                    event.getEventDescription()
-//
-//            );
-//
-//            int imageResource = getResources().getIdentifier(
-//                    event.getEventImage(),
-//                    "drawable",
-//                    getPackageName()
-//            );
-//
-//            intent.putExtra(
-//                    "eventImage",
-//                    imageResource
-//            );
-//
-//
-//            startActivity(intent);
-//        });
-
-
         eventContainer.addView(eventView);
     }
-
 
     @Override
     protected void onResume() {

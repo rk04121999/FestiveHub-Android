@@ -1,3 +1,10 @@
 <resources>
+
+
     <string name="app_name">Festive Hub</string>
+
+    <string name="user_id">User ID: %1$s</string>
+    <string name="registered_for">Registered for: %1$s</string>
+
+
 </resources>

@@ -200,6 +200,11 @@ public class EventManagementActivity extends AppCompatActivity {
                         R.id.btnDeleteEvent
                 );
 
+        Button btnRegisteredUsers =
+                eventView.findViewById(
+                        R.id.btnRegisteredUsers
+                );
+
         tvEventName.setText(
                 event.getEventName()
         );
@@ -233,6 +238,26 @@ public class EventManagementActivity extends AppCompatActivity {
                     documentId,
                     event.getEventName()
             );
+        });
+
+        btnRegisteredUsers.setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    EventManagementActivity.this,
+                    RegisteredUsersActivity.class
+            );
+
+            intent.putExtra(
+                    "eventId",
+                    documentId
+            );
+
+            intent.putExtra(
+                    "eventName",
+                    event.getEventName()
+            );
+
+            startActivity(intent);
         });
 
         managementEventContainer.addView(eventView);

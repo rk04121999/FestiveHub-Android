@@ -137,24 +137,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:lineSpacingExtra="4dp"
                 android:text="Join us for an exciting event and experience an amazing day with technology, innovation and entertainment. We Provide Detail Information About AI Tools And Technologies And How They Work."
                 android:textColor="#666666"
-                android:textSize="17sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="17sp" />
 
             <Button
                 android:id="@+id/btnBookEvent"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="#087F5F"
                 android:text="BOOK EVENT"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+<!--            <Button-->
+<!--                android:id="@+id/btnScanAttendance"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:text="Scan QR for Attendance"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textSize="16sp"-->
+<!--                android:visibility="visible" />-->
 
+            <TextView
+                android:id="@+id/registrationStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="Not Registered"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#222222"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/registrationQR"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:contentDescription="Registration QR Code"
+                android:visibility="gone" />
 
 
 
