@@ -36,40 +36,51 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="15dp"
-            android:text="Events"
+            android:text="Manage Events"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/adminStudentsButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="15dp"
-            android:text="Students"
-            android:textSize="18sp" />
+<!--        <Button-->
+<!--            android:id="@+id/adminStudentsButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:text="Students"-->
+<!--            android:textSize="18sp" />-->
 
         <Button
             android:id="@+id/adminVolunteersButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="15dp"
-            android:text="Volunteers"
+            android:text="Create Volunteers"
             android:textSize="18sp" />
 
-        <Button
-            android:id="@+id/adminCollegeButton"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginBottom="15dp"
-            android:text="College List"
-            android:textSize="18sp" />
+<!--        <Button-->
+<!--            android:id="@+id/adminCollegeButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:text="College List"-->
+<!--            android:textSize="18sp" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/adminNotificationsButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:text="Notifications"-->
+<!--            android:textSize="18sp" />-->
+
 
         <Button
-            android:id="@+id/adminNotificationsButton"
+            android:id="@+id/adminAttendanceButton"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_marginBottom="30dp"
-            android:text="Notifications"
-            android:textSize="18sp" />
+            android:layout_marginBottom="35dp"
+            android:text="Attendance Records"
+            android:textSize="18sp"/>
+
+
 
         <Button
             android:id="@+id/adminLogoutButton"

@@ -95,6 +95,17 @@
             android:name=".RegistrationQRActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".VolunteerDashboardActivity"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".AdminAttendanceActivity"
+            android:exported="false" />
+
+
+
 
     </application>
 

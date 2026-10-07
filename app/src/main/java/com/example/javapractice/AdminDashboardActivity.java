@@ -15,6 +15,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     private Button volunteersButton;
     private Button collegeButton;
     private Button notificationsButton;
+    private Button attendanceButton;
     private Button logoutButton;
 
     @Override
@@ -23,49 +24,60 @@ public class AdminDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_dashboard);
 
         eventsButton = findViewById(R.id.adminEventsButton);
-        studentsButton = findViewById(R.id.adminStudentsButton);
+//        studentsButton = findViewById(R.id.adminStudentsButton);
         volunteersButton = findViewById(R.id.adminVolunteersButton);
-        collegeButton = findViewById(R.id.adminCollegeButton);
-        notificationsButton = findViewById(R.id.adminNotificationsButton);
+//        collegeButton = findViewById(R.id.adminCollegeButton);
+//        notificationsButton = findViewById(R.id.adminNotificationsButton);
+        attendanceButton = findViewById(R.id.adminAttendanceButton);
         logoutButton = findViewById(R.id.adminLogoutButton);
 
         eventsButton.setOnClickListener(v -> {
+
             Intent intent = new Intent(
                     AdminDashboardActivity.this,
                     AdminEventsActivity.class
             );
+
             startActivity(intent);
         });
 
-//        studentsButton.setOnClickListener(v -> {
-//            Intent intent = new Intent(
-//                    AdminDashboardActivity.this,
-//                    AdminStudentsActivity.class
-//            );
-//            startActivity(intent);
-//        });
-
         volunteersButton.setOnClickListener(v -> {
+
             Intent intent = new Intent(
                     AdminDashboardActivity.this,
                     AdminVolunteersActivity.class
             );
+
             startActivity(intent);
         });
 
-        collegeButton.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    AdminDashboardActivity.this,
-                    AdminCollegeActivity.class
-            );
-            startActivity(intent);
-        });
+//        collegeButton.setOnClickListener(v -> {
+//
+//            Intent intent = new Intent(
+//                    AdminDashboardActivity.this,
+//                    AdminCollegeActivity.class
+//            );
+//
+//            startActivity(intent);
+//        });
 
-        notificationsButton.setOnClickListener(v -> {
+//        notificationsButton.setOnClickListener(v -> {
+//
+//            Intent intent = new Intent(
+//                    AdminDashboardActivity.this,
+//                    AdminNotificationsActivity.class
+//            );
+//
+//            startActivity(intent);
+//        });
+
+        attendanceButton.setOnClickListener(v -> {
+
             Intent intent = new Intent(
                     AdminDashboardActivity.this,
-                    AdminNotificationsActivity.class
+                    AdminAttendanceActivity.class
             );
+
             startActivity(intent);
         });
 
@@ -88,3 +100,4 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
     }
 }
+

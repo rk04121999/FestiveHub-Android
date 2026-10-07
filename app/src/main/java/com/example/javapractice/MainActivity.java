@@ -12,6 +12,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
 
     private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
 
     private static final String ADMIN_EMAIL = "admin@festivehub.com";
     private static final String ADMIN_PASSWORD = "Admin@123";
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         loginEmail = findViewById(R.id.loginEmail);
         loginPassword = findViewById(R.id.loginPassword);
@@ -134,23 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 password
         ).addOnCompleteListener(this, task -> {
 
-            if (task.isSuccessful()) {
-
-                Toast.makeText(
-                        MainActivity.this,
-                        "Login successful",
-                        Toast.LENGTH_SHORT
-                ).show();
-
-                Intent intent = new Intent(
-                        MainActivity.this,
-                        homepage.class
-                );
-
-                startActivity(intent);
-                finish();
-
-            } else {
+            if (!task.isSuccessful()) {
 
                 loginButton.setEnabled(true);
 
@@ -167,7 +154,98 @@ public class MainActivity extends AppCompatActivity {
                         error,
                         Toast.LENGTH_LONG
                 ).show();
+
+                return;
             }
+
+            if (mAuth.getCurrentUser() == null) {
+
+                loginButton.setEnabled(true);
+
+                Toast.makeText(
+                        MainActivity.this,
+                        "User session not found",
+                        Toast.LENGTH_LONG
+                ).show();
+
+                return;
+            }
+
+            String uid = mAuth.getCurrentUser().getUid();
+
+            db.collection("users")
+                    .document(uid)
+                    .get()
+                    .addOnSuccessListener(documentSnapshot -> {
+
+                        loginButton.setEnabled(true);
+
+                        if (documentSnapshot.exists()) {
+
+                            String role =
+                                    documentSnapshot.getString("role");
+
+                            if ("VOLUNTEER".equals(role)) {
+
+                                Toast.makeText(
+                                        MainActivity.this,
+                                        "Volunteer Login Successful",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                                Intent intent = new Intent(
+                                        MainActivity.this,
+                                        VolunteerDashboardActivity.class
+                                );
+
+                                startActivity(intent);
+                                finish();
+
+                            } else {
+
+                                Toast.makeText(
+                                        MainActivity.this,
+                                        "Login successful",
+                                        Toast.LENGTH_SHORT
+                                ).show();
+
+                                Intent intent = new Intent(
+                                        MainActivity.this,
+                                        homepage.class
+                                );
+
+                                startActivity(intent);
+                                finish();
+                            }
+
+                        } else {
+
+                            Toast.makeText(
+                                    MainActivity.this,
+                                    "Login successful",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+
+                            Intent intent = new Intent(
+                                    MainActivity.this,
+                                    homepage.class
+                            );
+
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+
+                        loginButton.setEnabled(true);
+
+                        Toast.makeText(
+                                MainActivity.this,
+                                "Role check failed: "
+                                        + e.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+                    });
         });
     }
 }
