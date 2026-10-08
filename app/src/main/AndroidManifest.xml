@@ -104,6 +104,10 @@
             android:name=".AdminAttendanceActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MyRegistrationActivity"
+            android:exported="false" />
+
 
 
 
