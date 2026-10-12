@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class EventsActivity extends AppCompatActivity {
 
     private LinearLayout navHome;
-    private LinearLayout navEvents;
+    private LinearLayout navMySchedule;
     private LinearLayout navProfile;
 
     @Override
@@ -18,7 +18,9 @@ public class EventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_events);
 
         navHome = findViewById(R.id.navHome);
-        navEvents = findViewById(R.id.navEvents);
+
+        navMySchedule = findViewById(R.id.navMySchedule);
+
         navProfile = findViewById(R.id.navProfile);
 
         navHome.setOnClickListener(v -> {
@@ -26,7 +28,7 @@ public class EventsActivity extends AppCompatActivity {
             finish();
         });
 
-        navEvents.setOnClickListener(v -> {
+        navMySchedule.setOnClickListener(v -> {
 
         });
 

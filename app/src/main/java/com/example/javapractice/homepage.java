@@ -28,7 +28,7 @@ public class homepage extends AppCompatActivity {
     private ImageView btnProfile;
 
     private LinearLayout navHome;
-    private LinearLayout navEvents;
+    private LinearLayout navMySchedule;
     private LinearLayout navProfile;
 
     @Override
@@ -43,17 +43,18 @@ public class homepage extends AppCompatActivity {
                 findViewById(R.id.eventContainer);
 
         navHome = findViewById(R.id.navHome);
-        navEvents = findViewById(R.id.navEvents);
+        navMySchedule = findViewById(R.id.navMySchedule);
+
         navProfile = findViewById(R.id.navProfile);
 
         navHome.setOnClickListener(v -> {
         });
 
-        navEvents.setOnClickListener(v -> {
+        navMySchedule.setOnClickListener(v -> {
 
             Intent intent = new Intent(
                     homepage.this,
-                    EventsActivity.class
+                    MyScheduleActivity.class
             );
 
             startActivity(intent);

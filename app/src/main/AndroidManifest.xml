@@ -108,6 +108,10 @@
             android:name=".MyRegistrationActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MyScheduleActivity"
+            android:exported="false" />
+
 
 
 

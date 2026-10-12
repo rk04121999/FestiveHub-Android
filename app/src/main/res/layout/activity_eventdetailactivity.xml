@@ -154,6 +154,15 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/btnAddToSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Add to My Schedule"
+                android:textSize="16sp"
+
+                />
+
 <!--            <Button-->
 <!--                android:id="@+id/btnScanAttendance"-->
 <!--                android:layout_width="match_parent"-->

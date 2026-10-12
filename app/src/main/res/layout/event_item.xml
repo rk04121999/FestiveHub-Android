@@ -9,13 +9,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:layout_marginStart="0dp"
-    android:layout_marginEnd="0dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
     android:layout_marginTop="15dp"
+    android:layout_margin="5dp"
+
     android:layout_marginBottom="10dp"
 
     app:cardCornerRadius="28dp"
-    app:cardElevation="0dp"
+    app:cardElevation="5dp"
     app:cardPreventCornerOverlap="true">
 
     <LinearLayout
@@ -32,15 +34,15 @@
                 android:id="@+id/ivEventImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="Event Image"
                 android:scaleType="centerCrop"
-                android:src="@drawable/aisummit"
-                android:contentDescription="Event Image" />
+                android:src="@drawable/aisummit" />
 
             <ImageButton
                 android:id="@+id/btnFavorite"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:layout_gravity="top|end"
+                android:layout_gravity="end"
                 android:layout_margin="14dp"
                 android:background="@drawable/bg_white_circle"
                 android:padding="11dp"
@@ -56,6 +58,7 @@
             android:orientation="vertical"
             android:paddingStart="18dp"
             android:paddingEnd="10dp"
+
             android:paddingBottom="14dp">
 
             <TextView

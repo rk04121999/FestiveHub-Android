@@ -19,6 +19,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -70,6 +71,10 @@ public class eventdetailactivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        Button btnAddToSchedule = findViewById(R.id.btnAddToSchedule);
+
+        btnAddToSchedule.setOnClickListener(v -> saveToSchedule());
 
         eventIdValue = getIntent().getStringExtra("eventId");
         eventNameValue = getIntent().getStringExtra("eventName");
@@ -503,5 +508,79 @@ public class eventdetailactivity extends AppCompatActivity {
             ).show();
         }
     }
+
+
+    private void saveToSchedule() {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null) {
+            Toast.makeText(this, "Please login first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (eventIdValue == null || eventIdValue.trim().isEmpty()) {
+            Toast.makeText(this, "Event information missing", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Map<String, Object> event = new HashMap<>();
+        event.put("eventId", eventIdValue);
+        event.put("eventName", eventName.getText().toString());
+        event.put("eventDate", eventDate.getText().toString());
+        event.put("eventTime", eventTime.getText().toString());
+        event.put("eventPlace", eventPlace.getText().toString());
+        event.put("eventAddress", eventAddress.getText().toString());
+        event.put("ticketPrice", tPrice.getText().toString());
+        event.put("addedAt", System.currentTimeMillis());
+
+        String uid = currentUser.getUid();
+
+        db.collection("users")
+                .document(uid)
+                .collection("mySchedule")
+                .document(eventIdValue)
+                .get()
+                .addOnSuccessListener(document -> {
+                    if (document.exists()) {
+                        Toast.makeText(
+                                this,
+                                "Event already in My Schedule",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        return;
+                    }
+
+                    db.collection("users")
+                            .document(uid)
+                            .collection("mySchedule")
+                            .document(eventIdValue)
+                            .set(event)
+                            .addOnSuccessListener(unused ->
+                                    Toast.makeText(
+                                            this,
+                                            "Added to My Schedule",
+                                            Toast.LENGTH_SHORT
+                                    ).show()
+                            )
+                            .addOnFailureListener(e ->
+                                    Toast.makeText(
+                                            this,
+                                            "Unable to add event: " + e.getMessage(),
+                                            Toast.LENGTH_LONG
+                                    ).show()
+                            );
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                this,
+                                "Unable to check schedule: " + e.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show()
+                );
+    }
+
+
+
+
 }
 
